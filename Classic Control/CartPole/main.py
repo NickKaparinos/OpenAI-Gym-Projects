@@ -4,15 +4,17 @@ Nick Kaparinos
 2021
 """
 
-import gym
-from stable_baselines3 import PPO, A2C, DQN, DDPG, SAC, TD3
-from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv, VecMonitor
-from stable_baselines3.common.env_util import make_vec_env
-from stable_baselines3.common.utils import set_random_seed
-from stable_baselines3.common.logger import configure
-from gym import wrappers
-from utilities import *
 import time
+
+import gym
+from gym import wrappers
+from stable_baselines3 import PPO
+from stable_baselines3.common.env_util import make_vec_env
+from stable_baselines3.common.logger import configure
+from stable_baselines3.common.utils import set_random_seed
+from stable_baselines3.common.vec_env import DummyVecEnv
+
+from utilities import *
 
 if __name__ == '__main__':
     start = time.perf_counter()
@@ -33,14 +35,14 @@ if __name__ == '__main__':
     model.name = model_name
 
     # Logger
-    logger = configure(log_dir, ["csv", "tensorboard"])  # "stdout",
+    logger = configure(log_dir, ["csv", "tensorboard"])
     log_steps_callback = LogStepsCallback(log_dir=log_dir)
     tqdm_callback = TqdmCallback()
     model.set_logger(logger)
     save_dict_to_file(model_hyperparameters, path=log_dir)  # log hyperparameters
 
     # Learn
-    model.learn(total_timesteps=1_000, callback=[tqdm_callback, log_steps_callback])
+    model.learn(total_timesteps=500_000, callback=[tqdm_callback, log_steps_callback])
 
     # Plot learning curve
     learning_curve(log_dir=log_dir)
@@ -58,6 +60,6 @@ if __name__ == '__main__':
             if done:
                 break
 
-    # Execution Time            # tensorboard --logdir './Classic Control/CartPole/logs'
-    end = time.perf_counter()  # tensorboard --logdir '.\Classic Control\CartPole\logs'
+    # Execution Time
+    end = time.perf_counter()  # tensorboard --logdir './Classic Control/CartPole/logs'
     print(f"\nExecution time = {end - start:.2f} second(s)")

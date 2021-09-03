@@ -4,10 +4,10 @@ Nick Kaparinos
 2021
 """
 
-from stable_baselines3.common.callbacks import BaseCallback
+import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-import matplotlib.pyplot as plt
+from stable_baselines3.common.callbacks import BaseCallback
 from tqdm import tqdm
 
 
