@@ -18,4 +18,5 @@ a perfect agent would be able to achieve a reward of +500 every episode.
 
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/CartPole/images/learning_curve.png" alt="drawing" width="500"/></p>
 
+#### Agent after 500000 training steps
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/CartPole/images/ppo.gif" width="400"/></p>
