@@ -1,5 +1,5 @@
 """
-Open AI Gym MountaiCar-v1
+Open AI Gym MountainCar-v0
 Nick Kaparinos
 2021
 """
@@ -9,6 +9,9 @@ import pandas as pd
 import seaborn as sns
 from stable_baselines3.common.callbacks import BaseCallback
 from tqdm import tqdm
+from os import listdir
+from tensorflow.python.summary.summary_iterator import summary_iterator
+import tensorflow as tf
 
 
 class LogStepsCallback(BaseCallback):
@@ -50,8 +53,8 @@ class TqdmCallback(BaseCallback):
         self.progress_bar = None
 
 
-def save_dict_to_file(dict, path):
-    f = open(path + '/hyperparameter_dict.txt', 'w')
+def save_dict_to_file(dict, path, txt_name='hyperparameter_dict'):
+    f = open(path + '/' + txt_name + '.txt', 'w')
     f.write(str(dict))
     f.close()
 
@@ -73,13 +76,17 @@ def calc_episode_rewards(training_data):
     return result
 
 
-def learning_curve(log_dir, window=10):
+def learning_curve_baselines(log_dir, window=10):
     # Read data
     training_data = pd.read_csv(log_dir + 'training_data.csv', index_col=None)
 
     # Calculate episode rewards
     episode_rewards = calc_episode_rewards(training_data)
 
+    learning_curve(episode_rewards=episode_rewards, log_dir=log_dir, window=window)
+
+
+def learning_curve(episode_rewards, log_dir, window=10):
     # Calculate rolling window metrics
     rolling_average = episode_rewards.rolling(window=window, min_periods=window).mean().dropna()
     rolling_max = episode_rewards.rolling(window=window, min_periods=window).max().dropna()
@@ -101,3 +108,34 @@ def learning_curve(log_dir, window=10):
 
     # Save figure
     plt.savefig(log_dir + 'learning_curve.png')
+
+
+# def learning_curve_tianshou(log_dir, data_file, window=10):
+#     # Read data
+#     training_data = pd.read_csv(log_dir + '/' + data_file, index_col=None)
+#     episode_rewards = training_data[['Value']]
+#
+#     learning_curve(episode_rewards=episode_rewards, log_dir=log_dir, window=window)
+
+def learning_curve_tianshou(log_dir, window=10):
+    # Find event file
+    files = listdir(log_dir)
+    for f in files:
+        if 'events' in f:
+            event_file = f
+            break
+
+    # Read episode rewards
+    episode_rewards_list = []
+    episode_rewards = pd.DataFrame(columns=['Reward'])
+    try:
+        for e in summary_iterator(log_dir + event_file):
+            if len(e.summary.value) > 0:
+                if e.summary.value[0].tag == 'train/reward':
+                    episode_rewards_list.append(e.summary.value[0].simple_value)
+    except Exception as e:
+        pass
+    episode_rewards['Reward'] = episode_rewards_list
+
+    # Learning curve
+    learning_curve(episode_rewards, log_dir, window=10)
