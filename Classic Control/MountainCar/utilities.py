@@ -75,17 +75,6 @@ def calc_episode_rewards(training_data):
     result['Reward'] = episode_rewards
     return result
 
-
-def learning_curve_baselines(log_dir, window=10):
-    # Read data
-    training_data = pd.read_csv(log_dir + 'training_data.csv', index_col=None)
-
-    # Calculate episode rewards
-    episode_rewards = calc_episode_rewards(training_data)
-
-    learning_curve(episode_rewards=episode_rewards, log_dir=log_dir, window=window)
-
-
 def learning_curve(episode_rewards, log_dir, window=10):
     # Calculate rolling window metrics
     rolling_average = episode_rewards.rolling(window=window, min_periods=window).mean().dropna()
@@ -107,15 +96,18 @@ def learning_curve(episode_rewards, log_dir, window=10):
     ax.set_xlabel('Episodes')
 
     # Save figure
-    plt.savefig(log_dir + 'learning_curve.png')
+    plt.savefig(log_dir + 'learning_curve' + str(window) + '.png')
+
+def learning_curve_baselines(log_dir, window=10):
+    # Read data
+    training_data = pd.read_csv(log_dir + 'training_data.csv', index_col=None)
+
+    # Calculate episode rewards
+    episode_rewards = calc_episode_rewards(training_data)
+
+    learning_curve(episode_rewards=episode_rewards, log_dir=log_dir, window=window)
 
 
-# def learning_curve_tianshou(log_dir, data_file, window=10):
-#     # Read data
-#     training_data = pd.read_csv(log_dir + '/' + data_file, index_col=None)
-#     episode_rewards = training_data[['Value']]
-#
-#     learning_curve(episode_rewards=episode_rewards, log_dir=log_dir, window=window)
 
 def learning_curve_tianshou(log_dir, window=10):
     # Find event file
@@ -138,4 +130,4 @@ def learning_curve_tianshou(log_dir, window=10):
     episode_rewards['Reward'] = episode_rewards_list
 
     # Learning curve
-    learning_curve(episode_rewards, log_dir, window=10)
+    learning_curve(episode_rewards, log_dir, window=window)
