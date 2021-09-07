@@ -16,8 +16,10 @@ from tianshou.utils import TensorboardLogger, LazyLogger
 import torch
 from torch import nn
 from tianshou.utils.net.common import Net
-
 from utilities import *
+
+log_dir = '/home/nikos/Nikos/Code/Projects/Gym/Classic Control/MountainCar/logs/Tianshou_ER_DD_DQN_06_Sep_2021_19_30_42/'
+learning_curve_tianshou(log_dir=log_dir, window=100)
 
 if __name__ == '__main__':
     start = time.perf_counter()
@@ -74,9 +76,36 @@ if __name__ == '__main__':
         return custom_epsilon_schedule
 
 
+    # Test function
+    def build_test_fn(num_episodes):
+        def custom_test_fn(epoch, env_step):
+            print(f"Epoch = {epoch}")
+
+            # Save agent
+            torch.save(policy.state_dict(), log_dir + f'dqn_epoch{epoch}.pth')
+
+            # No exploration
+            policy.set_eps(0.00)
+
+            # Record agents performance in video
+            for episode in range(num_episodes):
+                env = ts.env.DummyVectorEnv([lambda: wrappers.Monitor(env=gym.make(env_id),
+                                                                      directory=log_dir + '/videos/epoch_' + str(
+                                                                          epoch) + '/video' + str(episode), force=False)
+                                             for _ in range(1)])
+
+                # Video
+                policy.eval()
+                policy.set_eps(0.00)
+                collector = ts.data.Collector(policy, env, exploration_noise=True)
+                collector.collect(n_episode=1, render=1 / 60)
+
+        return custom_test_fn
+
+
     # Training
-    trainer_hyperparameters = {'max_epoch': 1, 'step_per_epoch': 1_000, 'step_per_collect': 5,
-                               'episode_per_test': 100,
+    trainer_hyperparameters = {'max_epoch': 5, 'step_per_epoch': 80_000, 'step_per_collect': 5,
+                               'episode_per_test': 10,
                                'batch_size': 64}
     epsilon_schedule_hyperparameters = {'max_epsilon': 0.7, 'min_epsilon': 0.0,
                                         'num_episodes_decay': int(trainer_hyperparameters['step_per_epoch'] * 0.4)}
@@ -85,7 +114,8 @@ if __name__ == '__main__':
     save_dict_to_file(all_hypeparameters, path=log_dir)
     result = ts.trainer.offpolicy_trainer(policy, train_collector, test_collector, **trainer_hyperparameters,
                                           train_fn=build_epsilon_schedule(**epsilon_schedule_hyperparameters),
-                                          test_fn=lambda epoch, env_step: policy.set_eps(0.00),
+                                          test_fn=build_test_fn(num_episodes=5),
+                                          # lambda epoch, env_step: policy.set_eps(0.00),
                                           stop_fn=None,
                                           logger=logger)
     print(f'Finished training! Use {result["duration"]}')
@@ -94,9 +124,11 @@ if __name__ == '__main__':
     learning_curve_tianshou(log_dir=log_dir, window=50)
 
     # Record Episode Video
-    num_episodes = 20
+    num_episodes = 10
     for i in range(num_episodes):
-        env = ts.env.DummyVectorEnv([lambda: wrappers.Monitor(env=gym.make(env_id), directory=log_dir + '/videos/video' + str(i), force=False) for _ in range(1)])
+        env = ts.env.DummyVectorEnv([lambda: wrappers.Monitor(env=gym.make(env_id),
+                                                              directory=log_dir + '/videos/final_agent/video' + str(i),
+                                                              force=False) for _ in range(1)])
 
         # Video
         policy.eval()
