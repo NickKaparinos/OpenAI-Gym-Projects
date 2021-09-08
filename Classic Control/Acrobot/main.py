@@ -1,5 +1,5 @@
 """
-Open AI Gym MountainCar-v0
+Open AI Gym Acrobot-v1
 Nick Kaparinos
 2021
 """
@@ -18,12 +18,9 @@ from torch import nn
 from tianshou.utils.net.common import Net
 from utilities import *
 
-log_dir = '/home/nikos/Nikos/Code/Projects/Gym/Classic Control/MountainCar/logs/Tianshou_ER_DD_DQN_06_Sep_2021_19_30_42/'
-learning_curve_tianshou(log_dir=log_dir, window=100)
-
 if __name__ == '__main__':
     start = time.perf_counter()
-    env_id = "MountainCar-v0"
+    env_id = "Acrobot-v1"
     seed = 0
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -63,7 +60,6 @@ if __name__ == '__main__':
                                         exploration_noise=True)
     test_collector = ts.data.Collector(policy, test_envs, exploration_noise=False)
 
-
     # Epsilon schedule
     def build_epsilon_schedule(max_epsilon=0.5, min_epsilon=0.0, num_episodes_decay=10000):
         def custom_epsilon_schedule(epoch, env_step):
@@ -74,7 +70,6 @@ if __name__ == '__main__':
             policy.set_eps(current_epsilon)
 
         return custom_epsilon_schedule
-
 
     # Test function
     def build_test_fn(num_episodes):
@@ -115,7 +110,6 @@ if __name__ == '__main__':
     result = ts.trainer.offpolicy_trainer(policy, train_collector, test_collector, **trainer_hyperparameters,
                                           train_fn=build_epsilon_schedule(**epsilon_schedule_hyperparameters),
                                           test_fn=build_test_fn(num_episodes=5),
-                                          # lambda epoch, env_step: policy.set_eps(0.00),
                                           stop_fn=None,
                                           logger=logger)
     print(f'Finished training! Use {result["duration"]}')
