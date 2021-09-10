@@ -33,6 +33,19 @@ A car is on a one-dimensional track, positioned between two "mountains". The goa
 #### Agent after 750000 training steps
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/MountainCar/results/openaigym.video.26.24298.video000000.gif" width="400"/></p>
 
+## MountainCarContinuous-v0
+A car is on a one-dimensional track, positioned between two "mountains". The goal is to drive up the mountain on the right; however, the car's engine is not strong enough to scale the mountain in a single pass. Therefore, the only way to succeed is to drive back and forth to build up momentum. Here, the reward is greater if you spend less energy to reach the goal
+
+
+### Solution using Soft Actor-Critic (SAC) with Prioritized Experience Replay
+
+
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/MountainCarContinuous/results/learning_curve50.png" alt="drawing" width="500"/></p>
+
+#### Agent after 150000 training steps
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/MountainCarContinuous/results/openaigym.video.25.37024.video000000.gif" width="400"/></p>
+
+
 
 ## Acrobot-v1
 The acrobot system includes two joints and two links, where the joint between the two links is actuated. Initially, the links are hanging downwards, and the goal is to swing the end of the lower link up to a given height. A reward of -1 is provided for every timestep until the goal is reached or 500 timesteps have passed.
