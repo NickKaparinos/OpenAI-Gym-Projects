@@ -22,6 +22,8 @@ if __name__ == '__main__':
     start = time.perf_counter()
     env_id = "MountainCar-v0"
     seed = 0
+    np.random.seed(seed)
+    torch.manual_seed(seed)
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     # Logging directory
@@ -35,6 +37,8 @@ if __name__ == '__main__':
     env.seed(seed=seed)
     train_envs = ts.env.DummyVectorEnv([lambda: gym.make(env_id) for _ in range(1)])
     test_envs = ts.env.DummyVectorEnv([lambda: gym.make(env_id) for _ in range(1)])
+    train_envs.seed(seed)
+    test_envs.seed(seed)
 
     # Neural network
     Q_param = {"hidden_sizes": [128, 128]}
@@ -60,6 +64,7 @@ if __name__ == '__main__':
                                         exploration_noise=True)
     test_collector = ts.data.Collector(policy, test_envs, exploration_noise=False)
 
+
     # Epsilon schedule
     def build_epsilon_schedule(max_epsilon=0.5, min_epsilon=0.0, num_episodes_decay=10000):
         def custom_epsilon_schedule(epoch, env_step):
@@ -70,6 +75,7 @@ if __name__ == '__main__':
             policy.set_eps(current_epsilon)
 
         return custom_epsilon_schedule
+
 
     # Test function
     def build_test_fn(num_episodes):

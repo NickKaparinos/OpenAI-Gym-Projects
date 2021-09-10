@@ -134,5 +134,5 @@ if __name__ == '__main__':
     torch.save(policy.state_dict(), log_dir + 'dqn.pth')
 
     # Execution Time
-    end = time.perf_counter()  # tensorboard --logdir './Classic Control/MountainCar/logs'
+    end = time.perf_counter()  # tensorboard --logdir './Classic Control/Acrobot/logs'
     print(f"\nExecution time = {end - start:.2f} second(s)")
