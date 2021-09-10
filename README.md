@@ -60,7 +60,7 @@ The acrobot system includes two joints and two links, where the joint between th
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/Acrobot/results/openaigym.video.38.37714.video000000.gif" width="400"/></p>
 
 
-## Acrobot-v1
+## Pendulum-v0
 The acrobot system includes two joints and two links, where the joint between the two links is actuated. Initially, the links are hanging downwards, and the goal is to swing the end of the lower link up to a given height. A reward of -1 is provided for every timestep until the goal is reached or 500 timesteps have passed.
 
 
@@ -69,5 +69,5 @@ The inverted pendulum swingup problem is a classic problem in the control litera
 
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/Pendulum/results/learning_curve50.png" alt="drawing" width="500"/></p>
 
-#### Agent after 1000000 training steps
+#### Agent after 200000 training steps
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/Pendulum/results/openaigym.video.10.6156.video000000.gif" width="400"/></p>
