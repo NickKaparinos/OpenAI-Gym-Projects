@@ -61,7 +61,7 @@ The acrobot system includes two joints and two links, where the joint between th
 
 
 ## Pendulum-v0
-The acrobot system includes two joints and two links, where the joint between the two links is actuated. Initially, the links are hanging downwards, and the goal is to swing the end of the lower link up to a given height. A reward of -1 is provided for every timestep until the goal is reached or 500 timesteps have passed.
+The inverted pendulum swingup problem is a classic problem in the control literature. In this version of the problem, the pendulum starts in a random position, and the goal is to swing it up so it stays upright.er link up to a given height. A reward of -1 is provided for every timestep until the goal is reached or 500 timesteps have passed.
 
 
 ### Solution using Deep Deterministic Policy Gradient (DDPG) with Prioritized Experience Replay
