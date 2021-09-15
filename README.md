@@ -18,7 +18,7 @@ a perfect agent would be able to achieve a reward of +500 every episode.
 
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/CartPole/results/learning_curve.png" alt="drawing" width="500"/></p>
 
-#### Agent after 500000 training steps
+#### Agent after 1250 episodes
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/CartPole/results/ppo.gif" width="400"/></p>
 
 ## MountainCar-v0
@@ -30,7 +30,7 @@ A car is on a one-dimensional track, positioned between two "mountains". The goa
 
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/MountainCar/results/learning_curve100.png" alt="drawing" width="500"/></p>
 
-#### Agent after 750000 training steps
+#### Agent after 4000 episodes
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/MountainCar/results/openaigym.video.26.24298.video000000.gif" width="400"/></p>
 
 ## MountainCarContinuous-v0
@@ -42,7 +42,7 @@ A car is on a one-dimensional track, positioned between two "mountains". The goa
 
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/MountainCarContinuous/results/learning_curve50.png" alt="drawing" width="500"/></p>
 
-#### Agent after 150000 training steps
+#### Agent after 700 episodes
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/MountainCarContinuous/results/openaigym.video.25.37024.video000000.gif" width="400"/></p>
 
 
@@ -56,7 +56,7 @@ The acrobot system includes two joints and two links, where the joint between th
 
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/Acrobot/results/learning_curve100.png" alt="drawing" width="500"/></p>
 
-#### Agent after 1000000 training steps
+#### Agent after 10000 episodes
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/Acrobot/results/openaigym.video.38.37714.video000000.gif" width="400"/></p>
 
 
@@ -65,9 +65,22 @@ The inverted pendulum swingup problem is a classic problem in the control litera
 
 
 ### Solution using Deep Deterministic Policy Gradient (DDPG) with Prioritized Experience Replay
-The inverted pendulum swingup problem is a classic problem in the control literature. In this version of the problem, the pendulum starts in a random position, and the goal is to swing it up so it stays upright.
 
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/Pendulum/results/learning_curve50.png" alt="drawing" width="500"/></p>
 
-#### Agent after 200000 training steps
+#### Agent after 1000 episodes
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/Pendulum/results/openaigym.video.10.6156.video000000.gif" width="400"/></p>
+
+# Box2D
+Continuous control tasks in the Box2D simulator.
+
+## BipedalWalker-v3
+Reward is given for moving forward, total 300+ points up to the far end. If the robot falls, it gets -100. Applying motor torque costs a small amount of points, more optimal agent will get better score. State consists of hull angle speed, angular velocity, horizontal speed, vertical speed, position of joints and joints angular speed, legs contact with ground, and 10 lidar rangefinder measurements. There's no coordinates in the state vector.
+
+
+### Solution using Soft Actor-Critic (SAC)
+
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/BipedalWalker/results/learning_curve25.png" alt="drawing" width="500"/></p>
+
+#### Agent after 1250 episodes
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/BipedalWalker/results/gif2.gif" width="400"/></p>
