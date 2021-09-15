@@ -12,7 +12,7 @@ import tianshou as ts
 import torch
 import numpy as np
 from torch.utils.tensorboard import SummaryWriter
-from tianshou.utils import TensorboardLogger, LazyLogger
+from tianshou.utils import TensorboardLogger
 import torch
 from torch import nn
 from tianshou.utils.net.common import Net
@@ -23,6 +23,7 @@ if __name__ == '__main__':
     env_id = "Acrobot-v1"
     seed = 0
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    print(device)
 
     # Logging directory
     model_name = 'Tianshou_ER_DD_DQN'
@@ -99,9 +100,8 @@ if __name__ == '__main__':
 
 
     # Training
-    trainer_hyperparameters = {'max_epoch': 5, 'step_per_epoch': 80_000, 'step_per_collect': 5,
-                               'episode_per_test': 10,
-                               'batch_size': 64}
+    trainer_hyperparameters = {'max_epoch': 2, 'step_per_epoch': 100_000, 'step_per_collect': 5,
+                               'episode_per_test': 10, 'batch_size': 64}
     epsilon_schedule_hyperparameters = {'max_epsilon': 0.7, 'min_epsilon': 0.0,
                                         'num_episodes_decay': int(trainer_hyperparameters['step_per_epoch'] * 0.4)}
     all_hypeparameters = model_hyperparameters | policy_hyperparameters | prioritized_buffer_hyperparameters | trainer_hyperparameters | epsilon_schedule_hyperparameters
@@ -109,13 +109,11 @@ if __name__ == '__main__':
     save_dict_to_file(all_hypeparameters, path=log_dir)
     result = ts.trainer.offpolicy_trainer(policy, train_collector, test_collector, **trainer_hyperparameters,
                                           train_fn=build_epsilon_schedule(**epsilon_schedule_hyperparameters),
-                                          test_fn=build_test_fn(num_episodes=5),
-                                          stop_fn=None,
-                                          logger=logger)
+                                          test_fn=build_test_fn(num_episodes=1), stop_fn=None, logger=logger)
     print(f'Finished training! Use {result["duration"]}')
 
     # Learning Curve
-    learning_curve_tianshou(log_dir=log_dir, window=50)
+    learning_curve_tianshou(log_dir=log_dir, window=1)
 
     # Record Episode Video
     num_episodes = 10
