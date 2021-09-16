@@ -25,7 +25,7 @@ a perfect agent would be able to achieve a reward of +500 every episode.
 A car is on a one-dimensional track, positioned between two "mountains". The goal is to drive up the mountain on the right; however, the car's engine is not strong enough to scale the mountain in a single pass. Therefore, the only way to succeed is to drive back and forth to build up momentum. A reward of -1 is provided for every timestep until the goal is reached or 200 timesteps have passed.
 
 
-### Solution using Double Dueling DQN with Prioritized Experience Replay
+### Solution using Double Dueling Deep Q Learning (DQN) with Prioritized Experience Replay
 
 
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/MountainCar/results/learning_curve100.png" alt="drawing" width="500"/></p>
@@ -51,7 +51,7 @@ A car is on a one-dimensional track, positioned between two "mountains". The goa
 The acrobot system includes two joints and two links, where the joint between the two links is actuated. Initially, the links are hanging downwards, and the goal is to swing the end of the lower link up to a given height. A reward of -1 is provided for every timestep until the goal is reached or 500 timesteps have passed.
 
 
-### Solution using Double Dueling DQN with Prioritized Experience Replay
+### Solution using Double Dueling Deep Q Learning (DQN) with Prioritized Experience Replay
 
 
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/Acrobot/results/learning_curve100.png" alt="drawing" width="500"/></p>
@@ -84,3 +84,13 @@ Reward is given for moving forward, total 300+ points up to the far end. If the 
 
 #### Agent after 1250 episodes
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/BipedalWalker/results/gif2.gif" width="400"/></p>
+
+## LunarLander-v2
+Landing pad is always at coordinates (0,0). Coordinates are the first two numbers in state vector. Reward for moving from the top of the screen to landing pad and zero speed is about 100..140 points. If lander moves away from landing pad it loses reward back. Episode finishes if the lander crashes or comes to rest, receiving additional -100 or +100 points. Each leg ground contact is +10. Firing main engine is -0.3 points each frame. Solved is 200 points. Landing outside landing pad is possible. Fuel is infinite, so an agent can learn to fly and then land on its first attempt. Four discrete actions available: do nothing, fire left orientation engine, fire main engine, fire right orientation engine.
+
+
+### Solution using Double Dueling Deep Q Learning (DQN)
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/LunarLander/results/learning_curve50.png" alt="drawing" width="500"/></p>
+
+#### Agent after 1500 episodes
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/LunarLander/results/lunarlander.gif" width="400"/></p>
