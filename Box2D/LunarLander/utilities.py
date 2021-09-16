@@ -1,5 +1,5 @@
 """
-Open AI Gym BipedalWalker-v3
+Open AI Gym LunarLander-v2
 Nick Kaparinos
 2021
 """
@@ -94,6 +94,7 @@ def learning_curve(episode_rewards, log_dir, window=10):
     ax.set_title('Learning Curve')
     ax.set_ylabel('Reward')
     ax.set_xlabel('Episodes')
+    ax.set(ylim=(-250, 325))
 
     # Save figure
     plt.savefig(log_dir + 'learning_curve' + str(window) + '.png')
@@ -146,6 +147,7 @@ def learning_curve_tianshou_multiple_runs(log_dirs, window=10):
                 break
 
         # Read episode rewards
+
         try:
             for e in summary_iterator(log_dir + event_file):
                 if len(e.summary.value) > 0:

@@ -87,12 +87,11 @@ if __name__ == '__main__':
         train_collector = ts.data.Collector(policy, train_envs,
                                             ts.data.PrioritizedVectorReplayBuffer(**prioritized_buffer_hyperparameters),
                                             exploration_noise=True)
-        test_collector = ts.data.Collector(policy, test_envs, exploration_noise=True)
     else:
         train_collector = ts.data.Collector(policy, train_envs,
                                             ts.data.ReplayBuffer(size=prioritized_buffer_hyperparameters['total_size']),
                                             exploration_noise=True)
-        test_collector = ts.data.Collector(policy, test_envs, exploration_noise=True)
+    test_collector = ts.data.Collector(policy, test_envs, exploration_noise=True)
 
     # Sigma schedule
     def build_sigma_schedule(max_sigma=0.5, min_sigma=0.0, steps_per_epoch=50_000, decay_time_steps=10_000):
