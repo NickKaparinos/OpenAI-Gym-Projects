@@ -5,6 +5,18 @@ Gym is an open source Python library for developing and comparing reinforcement 
 standard API to communicate between learning algorithms and environments, as well as a standard set of environments 
 compliant with that API. Since its release, Gym's API has become the field standard for doing this.
 
+# Gym environments solved:
+- [Classic Control](#classic-control)
+  * [CartPole-v1](#cartpole-v1)
+  * [MountainCar-v0](#mountaincar-v0)
+  * [MountainCarContinuous-v0](#mountaincarcontinuous-v0)
+  * [Acrobot-v1](#acrobot-v1)
+  * [Pendulum-v0](#pendulum-v0)
+- [Box2D](#box2d)
+  * [LunarLander-v2](#lunarlander-v2)
+  * [LunarLanderContinuous-v2](#lunarlandercontinuous-v2)
+  * [BipedalWalker-v3](#bipedalwalker-v3)
+
 # Classic Control
 Control theory problems from the classic RL literature.
 
@@ -74,6 +86,28 @@ The inverted pendulum swingup problem is a classic problem in the control litera
 # Box2D
 Continuous control tasks in the Box2D simulator.
 
+## LunarLander-v2
+Landing pad is always at coordinates (0,0). Coordinates are the first two numbers in state vector. Reward for moving from the top of the screen to landing pad and zero speed is about 100..140 points. If lander moves away from landing pad it loses reward back. Episode finishes if the lander crashes or comes to rest, receiving additional -100 or +100 points. Each leg ground contact is +10. Firing main engine is -0.3 points each frame. Solved is 200 points. Landing outside landing pad is possible. Fuel is infinite, so an agent can learn to fly and then land on its first attempt. Four discrete actions available: do nothing, fire left orientation engine, fire main engine, fire right orientation engine.
+
+
+### Solution using Double Dueling Deep Q Learning (DQN)
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/LunarLander/results/learning_curve50.png" alt="drawing" width="500"/></p>
+
+#### Agent after 1500 episodes
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/LunarLander/results/lunarlander.gif" width="400"/></p>
+
+## LunarLanderContinuous-v2
+Landing pad is always at coordinates (0,0). Coordinates are the first two numbers in state vector. Reward for moving from the top of the screen to landing pad and zero speed is about 100..140 points. If lander moves away from landing pad it loses reward back. Episode finishes if the lander crashes or comes to rest, receiving additional -100 or +100 points. Each leg ground contact is +10. Firing main engine is -0.3 points each frame. Solved is 200 points. Landing outside landing pad is possible. Fuel is infinite, so an agent can learn to fly and then land on its first attempt. Action is two real values vector from -1 to +1. First controls main engine, -1..0 off, 0..+1 throttle from 50% to 100% power. Engine can't work with less than 50% power. Second value -1.0..-0.5 fire left engine, +0.5..+1.0 fire right engine, -0.5..0.5 off.
+
+
+### Solution using Soft Actor-Critic (SAC)
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/LunarLanderContinuous/results/learning_curve25.png" alt="drawing" width="500"/></p>
+
+
+#### Agent after 1000 episodes
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/LunarLanderContinuous/results/gif.gif" width="400"/></p>
+
+
 ## BipedalWalker-v3
 Reward is given for moving forward, total 300+ points up to the far end. If the robot falls, it gets -100. Applying motor torque costs a small amount of points, more optimal agent will get better score. State consists of hull angle speed, angular velocity, horizontal speed, vertical speed, position of joints and joints angular speed, legs contact with ground, and 10 lidar rangefinder measurements. There's no coordinates in the state vector.
 
@@ -84,13 +118,3 @@ Reward is given for moving forward, total 300+ points up to the far end. If the 
 
 #### Agent after 1250 episodes
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/BipedalWalker/results/gif2.gif" width="400"/></p>
-
-## LunarLander-v2
-Landing pad is always at coordinates (0,0). Coordinates are the first two numbers in state vector. Reward for moving from the top of the screen to landing pad and zero speed is about 100..140 points. If lander moves away from landing pad it loses reward back. Episode finishes if the lander crashes or comes to rest, receiving additional -100 or +100 points. Each leg ground contact is +10. Firing main engine is -0.3 points each frame. Solved is 200 points. Landing outside landing pad is possible. Fuel is infinite, so an agent can learn to fly and then land on its first attempt. Four discrete actions available: do nothing, fire left orientation engine, fire main engine, fire right orientation engine.
-
-
-### Solution using Double Dueling Deep Q Learning (DQN)
-<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/LunarLander/results/learning_curve50.png" alt="drawing" width="500"/></p>
-
-#### Agent after 1500 episodes
-<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/LunarLander/results/lunarlander.gif" width="400"/></p>
