@@ -94,7 +94,7 @@ def learning_curve(episode_rewards, log_dir, window=10):
     ax.set_title('Learning Curve')
     ax.set_ylabel('Reward')
     ax.set_xlabel('Episodes')
-    ax.set(ylim=(-1000, 0))
+    ax.set(ylim=(-600, 25))
 
     # Save figure
     plt.savefig(log_dir + 'learning_curve' + str(window) + '.png')
