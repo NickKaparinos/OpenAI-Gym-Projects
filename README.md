@@ -16,7 +16,8 @@ compliant with that API. Since its release, Gym's API has become the field stand
   * [LunarLander-v2](#lunarlander-v2)
   * [LunarLanderContinuous-v2](#lunarlandercontinuous-v2)
   * [BipedalWalker-v3](#bipedalwalker-v3)
-
+- [MuJoCo](#mujoco)
+  * [InvertedPendulum-v2](#invertedpendulum-v2)
 # Classic Control
 Control theory problems from the classic RL literature.
 
@@ -80,7 +81,7 @@ The inverted pendulum swingup problem is a classic problem in the control litera
 
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/Pendulum/results/learning_curve50.png" alt="drawing" width="500"/></p>
 
-#### Agent after 1000 episodes
+#### Agent after 750 episodes
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/Pendulum/results/openaigym.video.10.6156.video000000.gif" width="400"/></p>
 
 # Box2D
@@ -118,3 +119,20 @@ Reward is given for moving forward, total 300+ points up to the far end. If the 
 
 #### Agent after 1250 episodes
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/BipedalWalker/results/gif2.gif" width="400"/></p>
+
+
+# MuJoCo
+Continuous control tasks, running in a fast physics simulator.
+
+## InvertedPendulum-v2
+An inverted pendulum that needs to be balanced by a cart. The agent gets a reward for every timestep that the pendulum has not fallen off the cart, with a maximum reward of +1000.
+
+### Proximal Policy Optimisation (PPO)
+
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/InvertedPendulum/results/learning_curve50.png" alt="drawing" width="500"/></p>
+
+#### Agent after 1400 episodes
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/InvertedPendulum/results/inverted_pendulum.gif" width="400"/></p>
+
+#### 100 episode performance evaluation
+Reward: 920.71± 224.04
