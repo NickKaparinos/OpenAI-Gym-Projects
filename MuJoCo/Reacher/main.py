@@ -108,15 +108,14 @@ if __name__ == '__main__':
 
             # Record agents performance in video with and without exploration
             for episode in range(num_episodes // 2):
-                # Video
                 env = ts.env.DummyVectorEnv([lambda: make_env() for _ in range(1)])
                 policy.eval()
                 collector = ts.data.Collector(policy, env, exploration_noise=True)
                 collector.collect_and_record = collect_and_record
                 collector.collect_and_record(self=collector, video_dir=log_dir + f'epoch{epoch}/video{episode}/',
                                              n_episode=1, render=1 / 60)
+
             for episode in range(num_episodes // 2, num_episodes):
-                # Video
                 env = ts.env.DummyVectorEnv([lambda: make_env() for _ in range(1)])
                 policy.eval()
                 collector = ts.data.Collector(policy, env, exploration_noise=False)
