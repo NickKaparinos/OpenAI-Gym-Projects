@@ -22,7 +22,6 @@ if __name__ == '__main__':
     np.random.seed(seed)
     torch.manual_seed(seed)
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    device = "cpu"
     load_pretrained_model = False
     model_log_dir, model_file, buffer_file = '', '', ''
 

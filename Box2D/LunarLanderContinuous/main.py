@@ -40,10 +40,8 @@ if __name__ == '__main__':
     env = gym.make(env_id)
     env.seed(seed=seed)
 
-    train_envs = ts.env.DummyVectorEnv(
-        [lambda: gym.make(env_id) for _ in range(1)])
-    test_envs = ts.env.DummyVectorEnv(
-        [lambda: gym.make(env_id) for _ in range(1)])
+    train_envs = ts.env.DummyVectorEnv([lambda: gym.make(env_id) for _ in range(1)])
+    test_envs = ts.env.DummyVectorEnv([lambda: gym.make(env_id) for _ in range(1)])
     train_envs.seed(seed)
     test_envs.seed(seed)
 
@@ -93,9 +91,11 @@ if __name__ == '__main__':
                                             exploration_noise=True)
     test_collector = ts.data.Collector(policy, test_envs, exploration_noise=True)
 
+
     # Sigma schedule
     def build_sigma_schedule(max_sigma=0.5, min_sigma=0.0, steps_per_epoch=50_000, decay_time_steps=10_000):
         decay_per_step = (max_sigma - min_sigma) / decay_time_steps
+
         def custom_sigma_schedule(epoch, env_step):
             step_number = (epoch - 1) * steps_per_epoch + env_step
 
@@ -105,6 +105,7 @@ if __name__ == '__main__':
             policy._noise = GaussianNoise(sigma=current_sigma * max_action)
 
         return custom_sigma_schedule
+
 
     # Test function
     def build_test_fn(num_episodes):
@@ -165,9 +166,6 @@ if __name__ == '__main__':
         policy.eval()
         collector = ts.data.Collector(policy, env, exploration_noise=False)
         collector.collect(n_episode=1, render=1 / 60)
-
-    # Save policy
-    torch.save(policy.state_dict(), log_dir + model_name + '.pth')
 
     # Execution Time
     end = time.perf_counter()  # tensorboard --logdir './Box2D/BipedalWalker/logs'
