@@ -146,8 +146,8 @@ A 2D robot trying to reach a randomly located target. The robot gets a negative 
 ### Solution using Soft Actor-Critic (SAC)
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/Reacher/results/learning_curve50.png" alt="drawing" width="500"/></p>
 
-#### Agent after 3000 episodes
-<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/Reacher/results/reacher.gif" width="400"/></p>
+#### Agent after 650 episodes
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/Reacher/results/reacher_new.gif" width="400"/></p>
 
 #### 100 episode performance evaluation
 Reward: -4.75 ± 1.67
