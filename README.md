@@ -18,6 +18,9 @@ compliant with that API. Since its release, Gym's API has become the field stand
   * [BipedalWalker-v3](#bipedalwalker-v3)
 - [MuJoCo](#mujoco)
   * [InvertedPendulum-v2](#invertedpendulum-v2)
+  * [Reacher-v2](#reacher-v2)
+  * [Hopper2D-v2](#hopper-v2)
+  * [Walker2D-v2](#walker2d-v2)
 # Classic Control
 Control theory problems from the classic RL literature.
 
@@ -88,7 +91,7 @@ The inverted pendulum swingup problem is a classic problem in the control litera
 Continuous control tasks in the Box2D simulator.
 
 ## LunarLander-v2
-Landing pad is always at coordinates (0,0). Coordinates are the first two numbers in state vector. Reward for moving from the top of the screen to landing pad and zero speed is about 100..140 points. If lander moves away from landing pad it loses reward back. Episode finishes if the lander crashes or comes to rest, receiving additional -100 or +100 points. Each leg ground contact is +10. Firing main engine is -0.3 points each frame. Solved is 200 points. Landing outside landing pad is possible. Fuel is infinite, so an agent can learn to fly and then land on its first attempt. Four discrete actions available: do nothing, fire left orientation engine, fire main engine, fire right orientation engine.
+Navigate the lander to its landing pad. Landing pad is always at coordinates (0,0). Coordinates are the first two numbers in state vector. Reward for moving from the top of the screen to landing pad and zero speed is about 100..140 points. If lander moves away from landing pad it loses reward back. Episode finishes if the lander crashes or comes to rest, receiving additional -100 or +100 points. Each leg ground contact is +10. Firing main engine is -0.3 points each frame. Solved is 200 points. Landing outside landing pad is possible. Fuel is infinite, so an agent can learn to fly and then land on its first attempt. Four discrete actions available: do nothing, fire left orientation engine, fire main engine, fire right orientation engine.
 
 
 ### Solution using Double Dueling Deep Q Learning (DQN)
@@ -98,7 +101,7 @@ Landing pad is always at coordinates (0,0). Coordinates are the first two number
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/LunarLander/results/lunarlander.gif" width="400"/></p>
 
 ## LunarLanderContinuous-v2
-Landing pad is always at coordinates (0,0). Coordinates are the first two numbers in state vector. Reward for moving from the top of the screen to landing pad and zero speed is about 100..140 points. If lander moves away from landing pad it loses reward back. Episode finishes if the lander crashes or comes to rest, receiving additional -100 or +100 points. Each leg ground contact is +10. Firing main engine is -0.3 points each frame. Solved is 200 points. Landing outside landing pad is possible. Fuel is infinite, so an agent can learn to fly and then land on its first attempt. Action is two real values vector from -1 to +1. First controls main engine, -1..0 off, 0..+1 throttle from 50% to 100% power. Engine can't work with less than 50% power. Second value -1.0..-0.5 fire left engine, +0.5..+1.0 fire right engine, -0.5..0.5 off.
+Navigate the lander to its landing pad. Landing pad is always at coordinates (0,0). Coordinates are the first two numbers in state vector. Reward for moving from the top of the screen to landing pad and zero speed is about 100..140 points. If lander moves away from landing pad it loses reward back. Episode finishes if the lander crashes or comes to rest, receiving additional -100 or +100 points. Each leg ground contact is +10. Firing main engine is -0.3 points each frame. Solved is 200 points. Landing outside landing pad is possible. Fuel is infinite, so an agent can learn to fly and then land on its first attempt. Action is two real values vector from -1 to +1. First controls main engine, -1..0 off, 0..+1 throttle from 50% to 100% power. Engine can't work with less than 50% power. Second value -1.0..-0.5 fire left engine, +0.5..+1.0 fire right engine, -0.5..0.5 off.
 
 
 ### Solution using Soft Actor-Critic (SAC)
@@ -110,7 +113,7 @@ Landing pad is always at coordinates (0,0). Coordinates are the first two number
 
 
 ## BipedalWalker-v3
-Reward is given for moving forward, total 300+ points up to the far end. If the robot falls, it gets -100. Applying motor torque costs a small amount of points, more optimal agent will get better score. State consists of hull angle speed, angular velocity, horizontal speed, vertical speed, position of joints and joints angular speed, legs contact with ground, and 10 lidar rangefinder measurements. There's no coordinates in the state vector.
+Train a bipedal robot to walk. Reward is given for moving forward, total 300+ points up to the far end. If the robot falls, it gets -100. Applying motor torque costs a small amount of points, more optimal agent will get better score. State consists of hull angle speed, angular velocity, horizontal speed, vertical speed, position of joints and joints angular speed, legs contact with ground, and 10 lidar rangefinder measurements. There's no coordinates in the state vector.
 
 
 ### Solution using Soft Actor-Critic (SAC)
@@ -136,3 +139,39 @@ An inverted pendulum that needs to be balanced by a cart. The agent gets a rewar
 
 #### 100 episode performance evaluation
 Reward: 920.71± 224.04
+
+## Reacher-v2
+A 2D robot trying to reach a randomly located target. The robot gets a negative reward the furthest away it is from the target location.
+
+### Solution using Deep Deterministic Policy Gradient (DDPG)
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/Reacher/results/learning_curve25.png" alt="drawing" width="500"/></p>
+
+#### Agent after 3000 episodes
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/Reacher/results/reacher.gif" width="400"/></p>
+
+#### 100 episode performance evaluation
+Reward: -9.34 ± 3.04
+
+## Hopper-v2
+A 2D robot that learns to hop. The agent gets a positive reward the furthest it travels.
+
+### Solution using Soft Actor-Critic (SAC)
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/Hopper/results/learning_curve50.png" alt="drawing" width="500"/></p>
+
+#### Agent after 1450 episodes
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/Hopper/results/hopper.gif" width="400"/></p>
+
+#### 100 episode performance evaluation
+Reward: 3625.53 ± 9.00
+
+## Walker2d-v2
+A 2D robot that learns to walk. The agent gets a positive reward the furthest it travels.
+
+### Solution using Soft Actor-Critic  (SAC)
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/Walker2d/results/learning_curve100.png" alt="drawing" width="500"/></p>
+
+#### Agent after 3250 episodes
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/Walker2d/results/walker2d.gif" width="400"/></p>
+
+#### 100 episode performance evaluation
+Reward: 5317.38 ± 15.86
