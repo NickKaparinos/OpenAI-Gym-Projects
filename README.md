@@ -142,15 +142,21 @@ A 2D robot that learns to hop. The agent gets a positive reward the furthest it 
 
 ### Solution using Soft Actor-Critic (SAC)
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/Hopper/results/learning_curve50.png" alt="drawing" width="500"/></p>
+
 #### Agent after 1450 episodes
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/Hopper/results/hopper.gif" width="400"/></p>
+
 #### 100 episode performance evaluation
 Reward: 3625.53 ± 9.00
+
 ## Walker2d-v2
 A 2D robot that learns to walk. The agent gets a positive reward the furthest it travels.
+
 ### Solution using Soft Actor-Critic  (SAC)
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/Walker2d/results/learning_curve100.png" alt="drawing" width="500"/></p>
+
 #### Agent after 3250 episodes
 <p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/Walker2d/results/walker2d.gif" width="400"/></p>
+
 #### 100 episode performance evaluation
 Reward: 5317.38 ± 15.86
