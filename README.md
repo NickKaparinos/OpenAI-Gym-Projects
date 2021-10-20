@@ -22,6 +22,8 @@ compliant with that API. Since its release, Gym's API has become the field stand
   * [HalfCheetah-v2](#halfcheetah-v2)
   * [Hopper2D-v2](#hopper-v2)
   * [Walker2D-v2](#walker2d-v2)
+- [Robotics](#robotics)
+  * [FetchReach-v1](#fetchreach-v1)
 # Classic Control
 Control theory problems from the classic RL literature.
 ## CartPole-v1
@@ -160,3 +162,18 @@ A 2D robot that learns to walk. The agent gets a positive reward the furthest it
 
 #### 100 episode performance evaluation
 Reward: 5317.38 ± 15.86
+
+# Robotics
+Simulated goal-based tasks for the Fetch and ShadowHand robots.
+
+## FetchREach-v1
+Move fetch to the goal position. A goal position is randomly chosen in 3D space. Control Fetch's end effector to reach that goal as quickly as possible. A negative reward is given at every timestep that the agent has not reached the goal position.
+
+### Solution using Soft Actor-Critic  (SAC) with prioritized experience replay
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Robotics/FetchReach/results/learning_curve25.png" alt="drawing" width="500"/></p>
+
+#### Agent after 2000 episodes
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Robotics/FetchReach/results/fetchreach.gif" width="400"/></p>
+
+#### 100 episode performance evaluation
+Reward: -1.78 ± 0.88
