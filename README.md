@@ -230,7 +230,7 @@ Reward: 5317.38 ± 15.86
 # Robotics
 Simulated goal-based tasks for the Fetch and ShadowHand robots.
 
-## FetchREach-v1
+## FetchReach-v1
 Move fetch to the goal position. A goal position is randomly chosen in 3D space. Control Fetch's end effector to reach that goal as quickly as possible. A negative reward is given at every timestep that the agent has not reached the goal position.
 
 ### Solution using Soft Actor-Critic  (SAC) with prioritized experience replay
