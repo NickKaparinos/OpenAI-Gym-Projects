@@ -1,0 +1,9 @@
+.idea/
+__pycache__/
+venv/
+logs/
+wandb/
+mazelab/
+Data/
+README.md
+test.py
