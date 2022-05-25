@@ -24,6 +24,8 @@ compliant with that API. Since its release, Gym's API has become the field stand
   * [Walker2D-v2](#walker2d-v2)
 - [Robotics](#robotics)
   * [FetchReach-v1](#fetchreach-v1)
+- [Atari](#atari)
+  * [Pong-v5](#pong-v5)
 # Classic Control
 Control theory problems from the classic RL literature.
 
@@ -241,3 +243,18 @@ Move fetch to the goal position. A goal position is randomly chosen in 3D space.
 
 #### 100 episode performance evaluation
 Reward: -1.78 ± 0.88
+
+# Atari
+Retro Atari video game environments.
+
+## Pong-v5
+Pong is a table tennis–themed twitch arcade sports video game. You control the right paddle, you compete against the left paddle controlled by the computer. You each try to keep deflecting the ball away from your goal and into your opponent’s goal. You get score points for getting the ball to pass the opponent’s paddle. You lose points if the ball passes your paddle. Each episode contains 21 games.
+
+### Double Dueling Deep Q Learning (DQN) with Prioritized Experience Replay
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Atari/Pong/Results/learning_curve.png" alt="drawing" width="500"/></p>
+
+#### Agent after 2000 episodes
+<p align="center"><img src="https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Atari/Pong/Results/pong.gif" width="400"/></p>
+
+#### 100 episode performance evaluation
+Reward: 21.00 ± 0.00
